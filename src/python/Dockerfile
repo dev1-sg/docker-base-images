@@ -1,6 +1,6 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM docker.io/ubuntu/python:3.12-24.04 AS base
+FROM docker.io/ubuntu/python:3.13-25.04 AS base
 
 USER root
 
