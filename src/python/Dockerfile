@@ -1,6 +1,7 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM docker.io/ubuntu/python:3.12-24.04 AS base
+FROM docker.io/python:3.12.11-bookworm AS python
+FROM docker.io/ubuntu:24.04 AS base
 
 USER root
 
@@ -13,3 +14,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     sudo bash git curl ca-certificates jq locales-all \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+FROM base AS final
+
+COPY --from=python /usr/local/bin /usr/local/bin
+COPY --from=python /usr/local/lib /usr/local/lib

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
-python=($(sed -n 's/^FROM [^:]*:\([^ ]*\).*/\1/p' Dockerfile | head -1))
+ubuntu=($(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' Dockerfile | head -2))
+python=($(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' Dockerfile | head -1))
 
-echo "${python:-dev}"
+echo "${python:-dev}-${ubuntu[1]:-null}"
