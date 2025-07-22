@@ -1,6 +1,6 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM docker.io/python:3.12.11-bookworm AS python
+FROM docker.io/python:3.13.5-bookworm AS python
 FROM docker.io/ubuntu:24.04 AS base
 
 USER root
