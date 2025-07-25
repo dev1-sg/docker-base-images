@@ -15,6 +15,7 @@ updates:
       - /src/golang
       - /src/java
       - /src/node
+      - /src/nvm
       - /src/python
       - /src/ubuntu
       - /src/uv
