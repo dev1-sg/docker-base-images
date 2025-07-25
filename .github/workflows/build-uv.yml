@@ -1,15 +1,15 @@
 ---
-name: Push python-uv
+name: Push uv
 
 on:
   push:
     branches:
       - main
     paths:
-      - src/python-uv/*
+      - src/uv/*
   pull_request:
     paths:
-      - src/python-uv/*
+      - src/uv/*
   workflow_dispatch:
 
 permissions:
@@ -18,7 +18,7 @@ permissions:
 
 env:
   AWS_OIDC_ROLE_ARN: ${{ secrets.AWS_OIDC_ROLE_ARN }}
-  AWS_ECR_PUBLIC_IMAGE_NAME: python-uv
+  AWS_ECR_PUBLIC_IMAGE_NAME: uv
   AWS_ECR_PUBLIC_REPOSITORY_GROUP: ubuntu
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   TZ: Asia/Singapore
