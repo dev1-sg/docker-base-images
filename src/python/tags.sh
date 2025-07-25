@@ -3,4 +3,8 @@
 ubuntu=($(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' Dockerfile | head -2))
 python=($(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' Dockerfile | head -1))
 
-echo "${python:-dev}-${ubuntu[1]:-null}"
+if [[ -n "${python}" && -n "${ubuntu}" ]]; then
+    echo "${python}-${ubuntu[1]}"
+else
+    echo "latest"
+fi

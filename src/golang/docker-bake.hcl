@@ -15,11 +15,11 @@ variable "AWS_ECR_PUBLIC_URL" {
 }
 
 variable "AWS_ECR_PUBLIC_IMAGE_NAME" {
-  default = "ubuntu"
+  default = "golang"
 }
 
 variable "AWS_ECR_PUBLIC_IMAGE_TAG" {
-  default = "golang"
+  default = "latest"
 }
 
 variable "AWS_ECR_PUBLIC_IMAGE_URI" {

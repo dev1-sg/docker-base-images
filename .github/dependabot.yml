@@ -13,6 +13,7 @@ updates:
     directories:
       - /src/dev
       - /src/golang
+      - /src/java
       - /src/node
       - /src/python
       - /src/ubuntu
