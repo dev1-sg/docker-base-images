@@ -16,8 +16,8 @@ updates:
       - /src/java
       - /src/node
       - /src/python
-      - /src/python-uv
       - /src/ubuntu
+      - /src/uv
     schedule:
       interval: daily
     commit-message:
