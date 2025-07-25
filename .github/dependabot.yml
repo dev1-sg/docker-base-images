@@ -16,6 +16,7 @@ updates:
       - /src/java
       - /src/node
       - /src/python
+      - /src/python-uv
       - /src/ubuntu
     schedule:
       interval: daily
