@@ -12,12 +12,14 @@ ENV TZ=Asia/Singapore \
     LC_ALL=en_US.UTF-8 \
     UV_INSTALL_DIR=/usr/local/bin \
     UV_PYTHON_INSTALL_DIR=/opt/uv \
-    UV_PYTHON_BIN_DIR=/usr/local/bin
+    UV_PYTHON_BIN_DIR=/usr/local/bin \
+    UV_TOOL_DIR=/opt/uv/tool \
+    UV_TOOL_BIN_DIR=/usr/local/bin
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     sudo bash git curl ca-certificates jq locales-all \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && mkdir -p /opt/uv \
+    && mkdir -p /opt/uv /opt/uv/tool \
     && curl -fsSL https://astral.sh/uv/install.sh | bash \
     && uv python install "${PYTHON_VERSION}" --default
