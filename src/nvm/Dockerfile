@@ -20,5 +20,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /opt/nvm \
     && curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh" | bash \
-    && . "/opt/nvm/nvm.sh" \
+    && echo 'export NVM_DIR="/opt/nvm"' >> /etc/profile.d/nvm.sh \
+    && echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> /etc/profile.d/nvm.sh \
+    && \. "/opt/nvm/nvm.sh" \
     && nvm install "${NODE_VERSION}"
