@@ -14,12 +14,11 @@ ENV TZ=Asia/Singapore \
     NVM_DIR=/opt/nvm \
     NVM_BIN=/usr/local/bin
 
-ENV PATH="${NVM_DIR}:${PATH}"
-
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     sudo bash git curl ca-certificates jq locales-all \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /opt/nvm \
     && curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh" | bash \
+    && . "/opt/nvm/nvm.sh" \
     && nvm install "${NODE_VERSION}"
