@@ -19,5 +19,5 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /opt/uv \
-    && curl -fsSL https://astral.sh/uv/install.sh | sh \
+    && curl -fsSL https://astral.sh/uv/install.sh | bash \
     && uv python install "${PYTHON_VERSION}" --default
