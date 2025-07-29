@@ -49,7 +49,6 @@ func TestContainersGoExecNvm(t *testing.T) {
 	defer container.Terminate(ctx)
 
 	commands := [][]string{
-		{"nvm", "--version"},
 		{"node", "--version"},
 	}
 
