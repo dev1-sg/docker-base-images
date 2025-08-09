@@ -12,6 +12,7 @@ updates:
   - package-ecosystem: docker
     directories:
       - /src/dev
+      - /src/golang
       - /src/java
       - /src/node
       - /src/ubuntu

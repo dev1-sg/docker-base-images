@@ -15,7 +15,7 @@ variable "AWS_ECR_PUBLIC_URL" {
 }
 
 variable "AWS_ECR_PUBLIC_IMAGE_NAME" {
-  default = "java"
+  default = "golang"
 }
 
 variable "AWS_ECR_PUBLIC_IMAGE_TAG" {
@@ -23,7 +23,7 @@ variable "AWS_ECR_PUBLIC_IMAGE_TAG" {
 }
 
 variable "AWS_ECR_PUBLIC_IMAGE_URI" {
-  default = "public.ecr.aws/dev1-sg/ubuntu/java:latest"
+  default = "public.ecr.aws/dev1-sg/ubuntu/golang:latest"
 }
 
 variable "AWS_ECR_PUBLIC_REPOSITORY_GROUP" {

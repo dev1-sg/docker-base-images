@@ -2,13 +2,13 @@
 
 FROM docker.io/ubuntu:24.04 AS base
 
-ARG ARCH=amd64
+ARG TARGETARCH
 ARG JAVA_VERSION=21
 
 USER root
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    sudo bash git curl ca-certificates jq locales \
+    sudo git curl ca-certificates locales \
     ca-certificates-java openjdk-${JAVA_VERSION}-jdk-headless maven \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
@@ -18,6 +18,6 @@ ENV TZ=Asia/Singapore \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8 \
-    JAVA_HOME=/usr/lib/jvm/java-${JAVA_VERSION}-openjdk-${ARCH}
+    JAVA_HOME=/usr/lib/jvm/java-${JAVA_VERSION}-openjdk-${TARGETARCH}
 
 ENV PATH="$JAVA_HOME/bin:$PATH"

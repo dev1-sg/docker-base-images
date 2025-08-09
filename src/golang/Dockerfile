@@ -17,19 +17,16 @@ ENV TZ=Asia/Singapore \
 
 FROM base AS build
 
-ARG NODE_VERSION=24.05.0
+ARG GO_VERSION=1.24.6
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     tar xz-utils
 
-RUN ARCH="$(case $(uname -m) in x86_64) echo x64 ;; aarch64) echo arm64 ;; esac)" \
-    && curl -fsSL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${ARCH}.tar.xz" -o /tmp/node.tar.xz \
-    && tar -xvf /tmp/node.tar.xz -C /usr/local --strip-components=1 \
-    "node-v${NODE_VERSION}-linux-${ARCH}/bin" \
-    "node-v${NODE_VERSION}-linux-${ARCH}/include" \
-    "node-v${NODE_VERSION}-linux-${ARCH}/lib" \
-    "node-v${NODE_VERSION}-linux-${ARCH}/share"
+RUN curl -fsSL "https://go.dev/dl/go${GO_VERSION}.linux-$(case $(uname -m) in x86_64) echo amd64 ;; aarch64) echo arm64 ;; esac).tar.gz" -o /tmp/go.tar.gz \
+    && tar -xvf /tmp/go.tar.gz -C /usr/local
 
 FROM base AS final
+
+ENV PATH="/usr/local/go/bin:${PATH}"
 
 COPY --from=build /usr/local /usr/local
