@@ -17,7 +17,7 @@ ENV TZ=Asia/Singapore \
 
 FROM base AS build
 
-ARG NODE_VERSION=24.05.0
+ARG NODE_VERSION=24.5.0
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     tar xz-utils
