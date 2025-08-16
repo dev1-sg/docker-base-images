@@ -16,4 +16,4 @@ runs:
     - name: Extract Version from Dockerfile
       id: extract_version
       shell: bash
-      run: ./src/${{ inputs.AWS_ECR_PUBLIC_IMAGE_NAME }}/${{ inputs.AWS_ECR_PUBLIC_IMAGE_TAG_SCRIPT }}
+      run: cd src/${{ inputs.AWS_ECR_PUBLIC_IMAGE_NAME }} && . ./${{ inputs.AWS_ECR_PUBLIC_IMAGE_TAG_SCRIPT }} && cd -
