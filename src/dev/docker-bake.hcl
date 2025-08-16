@@ -41,7 +41,7 @@ variable "AWS_ECR_PUBLIC_IMAGE_URI" {
 target "metadata" {
   labels = {
     "org.opencontainers.image.title"       = "${AWS_ECR_PUBLIC_IMAGE_NAME}"
-    "org.opencontainers.image.description" = "Default ${AWS_ECR_PUBLIC_IMAGE_NAME} ${AWS_ECR_PUBLIC_REPOSITORY_GROUP} image for internal use"
+    "org.opencontainers.image.description" = "Minimal ${AWS_ECR_PUBLIC_IMAGE_NAME} ${AWS_ECR_PUBLIC_REPOSITORY_GROUP} image for internal use"
     "org.opencontainers.image.url"         = "https://gitlab.com/dev1-sg/public/docker-${AWS_ECR_PUBLIC_REPOSITORY_GROUP}-images/-/tree/main/src/${AWS_ECR_PUBLIC_IMAGE_NAME}"
     "org.opencontainers.image.source"      = "https://gitlab.com/dev1-sg/public/docker-${AWS_ECR_PUBLIC_REPOSITORY_GROUP}-images"
     "org.opencontainers.image.version"     = "${AWS_ECR_PUBLIC_IMAGE_TAG}"
