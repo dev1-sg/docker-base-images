@@ -1,6 +1,6 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM docker.io/ubuntu:24.04 AS base
+FROM docker.io/ubuntu:noble AS base
 
 USER root
 

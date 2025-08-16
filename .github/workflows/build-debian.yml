@@ -1,15 +1,15 @@
 ---
-name: Push java
+name: Push debian
 
 on:
   push:
     branches:
       - main
     paths:
-      - src/java/*
+      - src/debian/*
   pull_request:
     paths:
-      - src/java/*
+      - src/debian/*
   workflow_dispatch:
 
 permissions:
@@ -18,8 +18,8 @@ permissions:
 
 env:
   AWS_OIDC_ROLE_ARN: ${{ secrets.AWS_OIDC_ROLE_ARN }}
-  AWS_ECR_PUBLIC_IMAGE_NAME: java
-  AWS_ECR_PUBLIC_REPOSITORY_GROUP: ubuntu
+  AWS_ECR_PUBLIC_IMAGE_NAME: debian
+  AWS_ECR_PUBLIC_REPOSITORY_GROUP: base
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   TZ: Asia/Singapore
 

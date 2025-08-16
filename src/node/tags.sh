@@ -1,10 +1,19 @@
 #!/usr/bin/env bash
 
-ubuntu=($(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' Dockerfile | head -1))
-node=($(sed -n 's/^ARG NODE_VERSION=\(.*\)/\1/p' Dockerfile | head -1))
+ubuntu=$(sed -n 's/^FROM .*:\([a-zA-Z]*\).*/\1/p' Dockerfile.ubuntu | head -1)
+debian=$(sed -n 's/^FROM .*:\([a-zA-Z]*\).*/\1/p' Dockerfile.debian | head -1)
+node=$(cat .node-version)
 
-if [[ -n "${node}" && -n "${ubuntu}" ]]; then
-    echo "${node}-${ubuntu}"
+export AWS_ECR_PUBLIC_IMAGE_TAG="${node}"
+export AWS_ECR_PUBLIC_IMAGE_TAG_DEBIAN="${node}-${debian}"
+export AWS_ECR_PUBLIC_IMAGE_TAG_UBUNTU="${node}-${ubuntu}"
+
+if [ -n "$GITHUB_ENV" ]; then
+  echo "AWS_ECR_PUBLIC_IMAGE_TAG=$AWS_ECR_PUBLIC_IMAGE_TAG" >> $GITHUB_ENV
+  echo "AWS_ECR_PUBLIC_IMAGE_TAG_DEBIAN=$AWS_ECR_PUBLIC_IMAGE_TAG_DEBIAN" >> $GITHUB_ENV
+  echo "AWS_ECR_PUBLIC_IMAGE_TAG_UBUNTU=$AWS_ECR_PUBLIC_IMAGE_TAG_UBUNTU" >> $GITHUB_ENV
 else
-    echo "latest"
+  echo "AWS_ECR_PUBLIC_IMAGE_TAG=$AWS_ECR_PUBLIC_IMAGE_TAG"
+  echo "AWS_ECR_PUBLIC_IMAGE_TAG_DEBIAN=$AWS_ECR_PUBLIC_IMAGE_TAG_DEBIAN"
+  echo "AWS_ECR_PUBLIC_IMAGE_TAG_UBUNTU=$AWS_ECR_PUBLIC_IMAGE_TAG_UBUNTU"
 fi

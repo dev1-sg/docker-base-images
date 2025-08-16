@@ -9,7 +9,7 @@ import (
 	"github.com/testcontainers/testcontainers-go"
 )
 
-var Uv = struct {
+var Debian = struct {
 	AWS_DEFAULT_REGION              string
 	AWS_ECR_PUBLIC_URI              string
 	AWS_ECR_PUBLIC_REPOSITORY_GROUP string
@@ -18,17 +18,17 @@ var Uv = struct {
 }{
 	AWS_DEFAULT_REGION:              "us-east-1",
 	AWS_ECR_PUBLIC_URI:              "public.ecr.aws/dev1-sg",
-	AWS_ECR_PUBLIC_REPOSITORY_GROUP: "ubuntu",
-	AWS_ECR_PUBLIC_IMAGE_NAME:       "uv",
+	AWS_ECR_PUBLIC_REPOSITORY_GROUP: "base",
+	AWS_ECR_PUBLIC_IMAGE_NAME:       "debian",
 	AWS_ECR_PUBLIC_IMAGE_TAG:        "latest",
 }
 
-func TestContainersGoPullUv(t *testing.T) {
+func TestContainersGoPullDebian(t *testing.T) {
 	ctx := context.Background()
 	for attempt := 0; attempt < 3; attempt++ {
 		container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 			ContainerRequest: testcontainers.ContainerRequest{
-				Image: Uv.AWS_ECR_PUBLIC_URI + "/" + Uv.AWS_ECR_PUBLIC_REPOSITORY_GROUP + "/" + Uv.AWS_ECR_PUBLIC_IMAGE_NAME + ":" + Uv.AWS_ECR_PUBLIC_IMAGE_TAG,
+				Image: Debian.AWS_ECR_PUBLIC_URI + "/" + Debian.AWS_ECR_PUBLIC_REPOSITORY_GROUP + "/" + Debian.AWS_ECR_PUBLIC_IMAGE_NAME + ":" + Debian.AWS_ECR_PUBLIC_IMAGE_TAG,
 			},
 		})
 		require.NoError(t, e)
@@ -36,11 +36,11 @@ func TestContainersGoPullUv(t *testing.T) {
 	}
 }
 
-func TestContainersGoExecUv(t *testing.T) {
+func TestContainersGoExecDebian(t *testing.T) {
 	ctx := context.Background()
 	container, err := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
-			Image: Uv.AWS_ECR_PUBLIC_URI + "/" + Uv.AWS_ECR_PUBLIC_REPOSITORY_GROUP + "/" + Uv.AWS_ECR_PUBLIC_IMAGE_NAME + ":" + Uv.AWS_ECR_PUBLIC_IMAGE_TAG,
+			Image: Debian.AWS_ECR_PUBLIC_URI + "/" + Debian.AWS_ECR_PUBLIC_REPOSITORY_GROUP + "/" + Debian.AWS_ECR_PUBLIC_IMAGE_NAME + ":" + Debian.AWS_ECR_PUBLIC_IMAGE_TAG,
 			Cmd:   []string{"sleep", "10"},
 		},
 		Started: true,
@@ -49,8 +49,7 @@ func TestContainersGoExecUv(t *testing.T) {
 	defer container.Terminate(ctx)
 
 	commands := [][]string{
-		{"uv", "--version"},
-		{"python", "--version"},
+		{"echo", "hello world"},
 	}
 
 	for _, cmd := range commands {

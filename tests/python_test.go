@@ -9,7 +9,7 @@ import (
 	"github.com/testcontainers/testcontainers-go"
 )
 
-var Java = struct {
+var Python = struct {
 	AWS_DEFAULT_REGION              string
 	AWS_ECR_PUBLIC_URI              string
 	AWS_ECR_PUBLIC_REPOSITORY_GROUP string
@@ -18,17 +18,17 @@ var Java = struct {
 }{
 	AWS_DEFAULT_REGION:              "us-east-1",
 	AWS_ECR_PUBLIC_URI:              "public.ecr.aws/dev1-sg",
-	AWS_ECR_PUBLIC_REPOSITORY_GROUP: "ubuntu",
-	AWS_ECR_PUBLIC_IMAGE_NAME:       "java",
+	AWS_ECR_PUBLIC_REPOSITORY_GROUP: "base",
+	AWS_ECR_PUBLIC_IMAGE_NAME:       "python",
 	AWS_ECR_PUBLIC_IMAGE_TAG:        "latest",
 }
 
-func TestContainersGoPullJava(t *testing.T) {
+func TestContainersGoPullPython(t *testing.T) {
 	ctx := context.Background()
 	for attempt := 0; attempt < 3; attempt++ {
 		container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 			ContainerRequest: testcontainers.ContainerRequest{
-				Image: Java.AWS_ECR_PUBLIC_URI + "/" + Java.AWS_ECR_PUBLIC_REPOSITORY_GROUP + "/" + Java.AWS_ECR_PUBLIC_IMAGE_NAME + ":" + Java.AWS_ECR_PUBLIC_IMAGE_TAG,
+				Image: Python.AWS_ECR_PUBLIC_URI + "/" + Python.AWS_ECR_PUBLIC_REPOSITORY_GROUP + "/" + Python.AWS_ECR_PUBLIC_IMAGE_NAME + ":" + Python.AWS_ECR_PUBLIC_IMAGE_TAG,
 			},
 		})
 		require.NoError(t, e)
@@ -36,11 +36,11 @@ func TestContainersGoPullJava(t *testing.T) {
 	}
 }
 
-func TestContainersGoExecJava(t *testing.T) {
+func TestContainersGoExecPython(t *testing.T) {
 	ctx := context.Background()
 	container, err := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
-			Image: Java.AWS_ECR_PUBLIC_URI + "/" + Java.AWS_ECR_PUBLIC_REPOSITORY_GROUP + "/" + Java.AWS_ECR_PUBLIC_IMAGE_NAME + ":" + Java.AWS_ECR_PUBLIC_IMAGE_TAG,
+			Image: Python.AWS_ECR_PUBLIC_URI + "/" + Python.AWS_ECR_PUBLIC_REPOSITORY_GROUP + "/" + Python.AWS_ECR_PUBLIC_IMAGE_NAME + ":" + Python.AWS_ECR_PUBLIC_IMAGE_TAG,
 			Cmd:   []string{"sleep", "10"},
 		},
 		Started: true,
@@ -49,7 +49,8 @@ func TestContainersGoExecJava(t *testing.T) {
 	defer container.Terminate(ctx)
 
 	commands := [][]string{
-		{"java", "--version"},
+		{"uv", "--version"},
+		{"python", "--version"},
 	}
 
 	for _, cmd := range commands {

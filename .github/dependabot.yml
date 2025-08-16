@@ -11,12 +11,12 @@ registries:
 updates:
   - package-ecosystem: docker
     directories:
+      - /src/debian
       - /src/dev
       - /src/golang
-      - /src/java
       - /src/node
+      - /src/python
       - /src/ubuntu
-      - /src/uv
     schedule:
       interval: daily
     commit-message:

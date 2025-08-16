@@ -1,0 +1,9 @@
+# syntax=docker.io/docker/dockerfile:1
+
+FROM docker.io/debian:bookworm AS base
+
+USER root
+
+ENV TZ=Asia/Singapore
+
+WORKDIR /workspace

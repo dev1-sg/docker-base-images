@@ -1,6 +1,6 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM docker.io/ubuntu:24.04 AS base
+FROM docker.io/ubuntu:noble AS base
 
 USER root
 
@@ -17,7 +17,7 @@ ENV TZ=Asia/Singapore \
 
 FROM base AS build
 
-ARG NODE_VERSION=24.5.0
+ARG NODE_VERSION
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     tar xz-utils

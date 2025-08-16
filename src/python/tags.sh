@@ -2,11 +2,11 @@
 
 ubuntu=$(sed -n 's/^FROM .*:\([a-zA-Z]*\).*/\1/p' Dockerfile.ubuntu | head -1)
 debian=$(sed -n 's/^FROM .*:\([a-zA-Z]*\).*/\1/p' Dockerfile.debian | head -1)
-golang=$(cat .go-version)
+python=$(cat .python-version)
 
-export AWS_ECR_PUBLIC_IMAGE_TAG="${golang}"
-export AWS_ECR_PUBLIC_IMAGE_TAG_DEBIAN="${golang}-${debian}"
-export AWS_ECR_PUBLIC_IMAGE_TAG_UBUNTU="${golang}-${ubuntu}"
+export AWS_ECR_PUBLIC_IMAGE_TAG="${python}"
+export AWS_ECR_PUBLIC_IMAGE_TAG_DEBIAN="${python}-${debian}"
+export AWS_ECR_PUBLIC_IMAGE_TAG_UBUNTU="${python}-${ubuntu}"
 
 if [ -n "$GITHUB_ENV" ]; then
   echo "AWS_ECR_PUBLIC_IMAGE_TAG=$AWS_ECR_PUBLIC_IMAGE_TAG" >> $GITHUB_ENV

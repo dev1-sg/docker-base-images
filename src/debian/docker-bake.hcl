@@ -14,8 +14,12 @@ variable "AWS_ECR_PUBLIC_URL" {
   default = "https://ecr-public.us-east-1.amazonaws.com"
 }
 
+variable "AWS_ECR_PUBLIC_REPOSITORY_GROUP" {
+  default = "base"
+}
+
 variable "AWS_ECR_PUBLIC_IMAGE_NAME" {
-  default = "java"
+  default = "debian"
 }
 
 variable "AWS_ECR_PUBLIC_IMAGE_TAG" {
@@ -23,11 +27,7 @@ variable "AWS_ECR_PUBLIC_IMAGE_TAG" {
 }
 
 variable "AWS_ECR_PUBLIC_IMAGE_URI" {
-  default = "public.ecr.aws/dev1-sg/ubuntu/java:latest"
-}
-
-variable "AWS_ECR_PUBLIC_REPOSITORY_GROUP" {
-  default = "ubuntu"
+  default = "public.ecr.aws/dev1-sg/base/debian:latest"
 }
 
 group "default" {
