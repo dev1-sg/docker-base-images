@@ -2,22 +2,21 @@
 
 FROM docker.io/ubuntu:noble AS base
 
+ARG PYTHON_VERSION
+
 USER root
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     sudo git curl ca-certificates locales \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
     && locale-gen en_US.UTF-8
 
 ENV TZ=Asia/Singapore \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
-    LC_ALL=en_US.UTF-8
+    LC_ALL=en_US.UTF-8 \
+    PYTHON_VERSION="${PYTHON_VERSION}"
 
 FROM base AS final
-
-ARG PYTHON_VERSION
 
 ENV UV_INSTALL_DIR=/usr/local/bin \
     UV_PYTHON_INSTALL_DIR=/opt/uv \
@@ -28,4 +27,6 @@ ENV UV_INSTALL_DIR=/usr/local/bin \
 RUN mkdir -p /opt/uv /opt/uv/tool \
     && curl -fsSL https://astral.sh/uv/install.sh | bash \
     && uv python install "${PYTHON_VERSION}" --default \
-    && uv tool install pip
+    && uv tool install pip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*

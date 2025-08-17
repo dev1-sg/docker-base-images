@@ -6,9 +6,9 @@ USER root
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     sudo git curl ca-certificates locales \
+    && locale-gen en_US.UTF-8 \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && locale-gen en_US.UTF-8
+    && rm -rf /var/lib/apt/lists/*
 
 ENV TZ=Asia/Singapore \
     LANG=en_US.UTF-8 \
