@@ -27,4 +27,5 @@ ENV UV_INSTALL_DIR=/usr/local/bin \
 
 RUN mkdir -p /opt/uv /opt/uv/tool \
     && curl -fsSL https://astral.sh/uv/install.sh | bash \
-    && uv python install "${PYTHON_VERSION}" --default
+    && uv python install "${PYTHON_VERSION}" --default \
+    && uv tool install pip
