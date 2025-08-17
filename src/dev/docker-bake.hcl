@@ -58,22 +58,6 @@ target "settings" {
   ]
 }
 
-group "default" {
-  targets = ["test-debian"]
-}
-
-group "test" {
-  targets = ["test-debian"]
-}
-
-group "build" {
-  targets = ["build-debian", "build-ubuntu"]
-}
-
-group "push" {
-  targets = ["push-debian", "push-ubuntu"]
-}
-
 target "test-debian" {
   inherits = ["settings", "metadata"]
   dockerfile = "Dockerfile.debian"
@@ -130,4 +114,20 @@ target "push-ubuntu" {
     "${AWS_ECR_PUBLIC_URI}/${AWS_ECR_PUBLIC_REPOSITORY_GROUP}/${AWS_ECR_PUBLIC_IMAGE_NAME}:latest-ubuntu",
     "${AWS_ECR_PUBLIC_URI}/${AWS_ECR_PUBLIC_REPOSITORY_GROUP}/${AWS_ECR_PUBLIC_IMAGE_NAME}:${AWS_ECR_PUBLIC_IMAGE_TAG_UBUNTU}",
   ]
+}
+
+group "default" {
+  targets = ["test-debian"]
+}
+
+group "test" {
+  targets = ["test-debian"]
+}
+
+group "build" {
+  targets = ["build-debian", "build-ubuntu"]
+}
+
+group "push" {
+  targets = ["push-debian", "push-ubuntu"]
 }
