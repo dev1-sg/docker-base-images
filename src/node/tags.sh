@@ -5,8 +5,8 @@ debian=$(sed -n 's/^FROM .*:\([a-zA-Z]*\).*/\1/p' Dockerfile.debian | head -1)
 node=$(cat .node-version)
 
 export AWS_ECR_PUBLIC_IMAGE_TAG="${node}"
-export AWS_ECR_PUBLIC_IMAGE_TAG_DEBIAN="${node}-${debian}"
-export AWS_ECR_PUBLIC_IMAGE_TAG_UBUNTU="${node}-${ubuntu}"
+export AWS_ECR_PUBLIC_IMAGE_TAG_DEBIAN="${debian}"
+export AWS_ECR_PUBLIC_IMAGE_TAG_UBUNTU="${ubuntu}"
 
 if [ -n "$GITHUB_ENV" ]; then
   echo "AWS_ECR_PUBLIC_IMAGE_TAG=$AWS_ECR_PUBLIC_IMAGE_TAG" >> $GITHUB_ENV
