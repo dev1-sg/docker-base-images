@@ -41,7 +41,7 @@ func TestContainersGoExecUbuntu(t *testing.T) {
 	container, err := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
 			Image: Ubuntu.AWS_ECR_PUBLIC_URI + "/" + Ubuntu.AWS_ECR_PUBLIC_REPOSITORY_GROUP + "/" + Ubuntu.AWS_ECR_PUBLIC_IMAGE_NAME + ":" + Ubuntu.AWS_ECR_PUBLIC_IMAGE_TAG,
-			Cmd:   []string{"sleep", "10"},
+			Cmd:   []string{"/bin/bash", "-c", "sleep infinity"},
 		},
 		Started: true,
 	})
@@ -49,7 +49,7 @@ func TestContainersGoExecUbuntu(t *testing.T) {
 	defer container.Terminate(ctx)
 
 	commands := [][]string{
-		{"echo", "hello world"},
+		{"/bin/bash", "-c", "-l", "echo hello world"},
 	}
 
 	for _, cmd := range commands {
