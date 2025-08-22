@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
+set -e
+
 ubuntu=$(sed -n 's/^FROM .*:\([a-zA-Z]*\).*/\1/p' Dockerfile | head -1)
+
+if [ -z "$ubuntu" ]; then
+  exit 1
+fi
 
 export AWS_ECR_PUBLIC_IMAGE_TAG="${ubuntu}"
 

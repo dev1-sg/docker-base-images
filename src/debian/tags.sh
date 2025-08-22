@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
+set -e
+
 debian=$(sed -n 's/^FROM .*:\([a-zA-Z]*\).*/\1/p' Dockerfile | head -1)
+
+if [ -z "$debian" ]; then
+  exit 1
+fi
 
 export AWS_ECR_PUBLIC_IMAGE_TAG="${debian}"
 
