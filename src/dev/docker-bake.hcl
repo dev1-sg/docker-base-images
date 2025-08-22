@@ -59,21 +59,21 @@ target "settings" {
 }
 
 target "test-debian" {
-  inherits = ["settings", "metadata"]
+  inherits   = ["settings", "metadata"]
   dockerfile = "Dockerfile.debian"
-  platforms = ["linux/amd64", "linux/arm64"]
-  tags = []
+  platforms  = ["linux/amd64", "linux/arm64"]
+  tags       = []
 }
 
 target "test-ubuntu" {
-  inherits = ["settings", "metadata"]
+  inherits   = ["settings", "metadata"]
   dockerfile = "Dockerfile.ubuntu"
-  platforms = ["linux/amd64", "linux/arm64"]
-  tags = []
+  platforms  = ["linux/amd64", "linux/arm64"]
+  tags       = []
 }
 
 target "build-debian" {
-  inherits = ["settings", "metadata"]
+  inherits   = ["settings", "metadata"]
   dockerfile = "Dockerfile.debian"
   output     = ["type=docker"]
   tags = [
@@ -84,7 +84,7 @@ target "build-debian" {
 }
 
 target "build-ubuntu" {
-  inherits = ["settings", "metadata"]
+  inherits   = ["settings", "metadata"]
   dockerfile = "Dockerfile.ubuntu"
   output     = ["type=docker"]
   tags = [
@@ -94,7 +94,7 @@ target "build-ubuntu" {
 }
 
 target "push-debian" {
-  inherits = ["settings", "metadata"]
+  inherits   = ["settings", "metadata"]
   dockerfile = "Dockerfile.debian"
   platforms  = ["linux/amd64", "linux/arm64"]
   output     = ["type=registry"]
@@ -106,7 +106,7 @@ target "push-debian" {
 }
 
 target "push-ubuntu" {
-  inherits = ["settings", "metadata"]
+  inherits   = ["settings", "metadata"]
   dockerfile = "Dockerfile.ubuntu"
   platforms  = ["linux/amd64", "linux/arm64"]
   output     = ["type=registry"]
