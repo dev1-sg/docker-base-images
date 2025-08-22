@@ -5,7 +5,7 @@ set -e
 debian=$(sed -n 's/^FROM .*:\([a-zA-Z]*\).*/\1/p' Dockerfile.debian | head -1)
 ubuntu=$(sed -n 's/^FROM .*:\([a-zA-Z]*\).*/\1/p' Dockerfile.ubuntu | head -1)
 
-if [ -z "$debian" ] || [ -z "$ubuntu" ]; then exit 1 fi
+if [ -z "$debian" ] || [ -z "$ubuntu" ]; then exit 1; fi
 
 export AWS_ECR_PUBLIC_IMAGE_TAG="${debian}"
 export AWS_ECR_PUBLIC_IMAGE_TAG_UBUNTU="${ubuntu}"
