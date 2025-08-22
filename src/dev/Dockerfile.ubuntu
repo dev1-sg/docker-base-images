@@ -4,6 +4,14 @@ FROM docker.io/ubuntu:noble AS base
 
 USER root
 
-ENV TZ=Asia/Singapore
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    tzdata locales sudo git curl ca-certificates \
+    && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
+    && locale-gen en_US.UTF-8 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /workspace
+ENV TZ=Asia/Singapore \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=en_US.UTF-8

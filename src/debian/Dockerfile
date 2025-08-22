@@ -5,7 +5,7 @@ FROM docker.io/debian:bookworm AS base
 USER root
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    sudo git curl ca-certificates locales \
+    tzdata locales sudo git curl ca-certificates \
     && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
     && locale-gen en_US.UTF-8 \
     && apt-get clean \
