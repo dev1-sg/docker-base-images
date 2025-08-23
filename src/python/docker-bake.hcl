@@ -23,7 +23,7 @@ variable "AWS_ECR_PUBLIC_IMAGE_NAME" {
 }
 
 variable "AWS_ECR_PUBLIC_IMAGE_TAG" {
-  default = "3.13.7"
+  default = "3.11.13"
 }
 
 variable "AWS_ECR_PUBLIC_IMAGE_TAG_DEBIAN" {
