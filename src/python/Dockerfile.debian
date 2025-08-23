@@ -19,7 +19,7 @@ ENV TZ=Asia/Singapore \
 
 FROM base AS final
 
-ENV PATH="${HOME}/.local/bin/env:${PATH}"
+ENV PATH="/root/.local/bin:${PATH}"
 
 RUN curl -fsSL https://astral.sh/uv/install.sh | bash \
     && uv python install "${PYTHON_VERSION}" --default \
