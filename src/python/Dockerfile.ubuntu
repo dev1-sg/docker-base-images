@@ -19,9 +19,14 @@ ENV TZ=Asia/Singapore \
 
 FROM base AS final
 
-ENV PATH="/root/.local/bin:${PATH}"
+ENV UV_INSTALL_DIR=/usr/local/bin \
+    UV_PYTHON_INSTALL_DIR=/opt/uv \
+    UV_PYTHON_BIN_DIR=/usr/local/bin \
+    UV_TOOL_DIR=/opt/uv/tool \
+    UV_TOOL_BIN_DIR=/usr/local/bin
 
-RUN curl -fsSL https://astral.sh/uv/install.sh | bash \
+RUN mkdir -p /opt/uv /opt/uv/tool \
+    && curl -fsSL https://astral.sh/uv/install.sh | bash \
     && uv python install "${PYTHON_VERSION}" --default \
     && uv tool install pip \
     && apt-get clean \
