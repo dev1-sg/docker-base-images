@@ -15,7 +15,9 @@ ENV TZ=Asia/Singapore \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8 \
-    GO_VERSION="${GO_VERSION}"
+    GO_VERSION="${GO_VERSION}" \
+    GOPATH=/go \
+    GOTOOLCHAIN=local
 
 FROM base AS build
 
