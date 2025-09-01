@@ -11,11 +11,8 @@ registries:
 updates:
   - package-ecosystem: docker
     directories:
+      - /src/alpine
       - /src/debian
-      - /src/dev
-      - /src/golang
-      - /src/node
-      - /src/python
       - /src/ubuntu
     schedule:
       interval: daily

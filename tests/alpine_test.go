@@ -9,7 +9,7 @@ import (
 	"github.com/testcontainers/testcontainers-go"
 )
 
-var Python = struct {
+var Alpine = struct {
 	AWS_DEFAULT_REGION              string
 	AWS_ECR_PUBLIC_URI              string
 	AWS_ECR_PUBLIC_REPOSITORY_GROUP string
@@ -19,16 +19,16 @@ var Python = struct {
 	AWS_DEFAULT_REGION:              "us-east-1",
 	AWS_ECR_PUBLIC_URI:              "public.ecr.aws/dev1-sg",
 	AWS_ECR_PUBLIC_REPOSITORY_GROUP: "base",
-	AWS_ECR_PUBLIC_IMAGE_NAME:       "python",
+	AWS_ECR_PUBLIC_IMAGE_NAME:       "alpine",
 	AWS_ECR_PUBLIC_IMAGE_TAG:        "latest",
 }
 
-func TestContainersGoPullPython(t *testing.T) {
+func TestContainersGoPullAlpine(t *testing.T) {
 	ctx := context.Background()
 	for attempt := 0; attempt < 3; attempt++ {
 		container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 			ContainerRequest: testcontainers.ContainerRequest{
-				Image: Python.AWS_ECR_PUBLIC_URI + "/" + Python.AWS_ECR_PUBLIC_REPOSITORY_GROUP + "/" + Python.AWS_ECR_PUBLIC_IMAGE_NAME + ":" + Python.AWS_ECR_PUBLIC_IMAGE_TAG,
+				Image: Alpine.AWS_ECR_PUBLIC_URI + "/" + Alpine.AWS_ECR_PUBLIC_REPOSITORY_GROUP + "/" + Alpine.AWS_ECR_PUBLIC_IMAGE_NAME + ":" + Alpine.AWS_ECR_PUBLIC_IMAGE_TAG,
 			},
 		})
 		require.NoError(t, e)
@@ -36,11 +36,11 @@ func TestContainersGoPullPython(t *testing.T) {
 	}
 }
 
-func TestContainersGoExecPython(t *testing.T) {
+func TestContainersGoExecAlpine(t *testing.T) {
 	ctx := context.Background()
 	container, err := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
-			Image: Python.AWS_ECR_PUBLIC_URI + "/" + Python.AWS_ECR_PUBLIC_REPOSITORY_GROUP + "/" + Python.AWS_ECR_PUBLIC_IMAGE_NAME + ":" + Python.AWS_ECR_PUBLIC_IMAGE_TAG,
+			Image: Alpine.AWS_ECR_PUBLIC_URI + "/" + Alpine.AWS_ECR_PUBLIC_REPOSITORY_GROUP + "/" + Alpine.AWS_ECR_PUBLIC_IMAGE_NAME + ":" + Alpine.AWS_ECR_PUBLIC_IMAGE_TAG,
 			Cmd:   []string{"/bin/bash", "-c", "sleep infinity"},
 		},
 		Started: true,
@@ -49,8 +49,7 @@ func TestContainersGoExecPython(t *testing.T) {
 	defer container.Terminate(ctx)
 
 	commands := [][]string{
-		{"/bin/bash", "-c", "python --version"},
-		{"/bin/bash", "-c", "pip --version"},
+		{"/bin/bash", "-c", "echo hello world"},
 	}
 
 	for _, cmd := range commands {
