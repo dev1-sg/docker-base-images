@@ -2,7 +2,7 @@
 
 [![Build On Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new/?repo=github)
 
-This repository contains a collection of ubuntu Docker images used across multiple projects.
+This repository contains a collection of base images used across multiple projects.
 
 - Dependency updates are managed by Dependabot
 - Images are automatically built, auto-merged, and pushed to Amazon ECR Public
